@@ -45,8 +45,13 @@ class App(QMainWindow):
         username = self.textbox1.text()
         password = self.textbox2.text()
 
-        QMessageBox.question(self, username, password, QMessageBox.Ok, QMessageBox.Ok)
-        self.textbox.setText("")
+        q = QMessageBox.question(self, username, password, QMessageBox.Ok, QMessageBox.No)
+        self.textbox1.setText("")
+        if q == QMessageBox.Yes:
+            print("aaaaa")
+        else :
+            print("affdsfsda")
+        self.show()
 
 
 if __name__ == '__main__':
