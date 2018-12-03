@@ -84,34 +84,39 @@ conn.cursor().execute("CREATE TABLE IF NOT EXISTS User(Email varchar(50) NOT NUL
                         Username varchar(50) NOT NULL, \
                         Password varchar(50) NOT NULL,\
                         PRIMARY KEY (Username),\
-                        UNIQUE (Email))")
+                        UNIQUE (Email))\
+                        ENGINE=INNODB")
 
 conn.cursor().execute("CREATE TABLE IF NOT EXISTS Staff(Username varchar(50) NOT NULL,\
                             PRIMARY KEY (Username),\
                             FOREIGN KEY (Username)\
                             REFERENCES User (Username)\
                             ON DELETE CASCADE\
-                            ON UPDATE CASCADE)")
+                            ON UPDATE CASCADE)\
+                            ENGINE=INNODB")
 
 conn.cursor().execute("CREATE TABLE IF NOT EXISTS Visitor(Username varchar(50) NOT NULL,\
                         PRIMARY KEY (Username),\
                         FOREIGN KEY (Username)\
                         REFERENCES User (Username)\
                         ON DELETE CASCADE\
-                        ON UPDATE CASCADE)")
+                        ON UPDATE CASCADE)\
+                        ENGINE=INNODB")
 
 conn.cursor().execute("CREATE TABLE IF NOT EXISTS Admin(Username varchar(50) NOT NULL,\
                         PRIMARY KEY (Username),\
                         FOREIGN KEY (Username)\
                         REFERENCES User (Username)\
                         ON DELETE CASCADE\
-                        ON UPDATE CASCADE)")
+                        ON UPDATE CASCADE)\
+                        ENGINE=INNODB")
 
 conn.cursor().execute("CREATE TABLE IF NOT EXISTS Exhibit(\
                         Name varchar(50) NOT NULL, \
                         Size int NOT NULL,\
                         Water_Feature boolean NOT NULL,\
-                        PRIMARY KEY (Name))")
+                        PRIMARY KEY (Name))\
+                        ENGINE=INNODB")
 
 conn.cursor().execute("CREATE TABLE IF NOT EXISTS Shows(\
                         Name varchar(50) NOT NULL, \
@@ -126,7 +131,8 @@ conn.cursor().execute("CREATE TABLE IF NOT EXISTS Shows(\
                         FOREIGN KEY (Exhibit)\
                         REFERENCES Exhibit (Name)\
                         ON DELETE CASCADE\
-                        ON UPDATE CASCADE)")
+                        ON UPDATE CASCADE)\
+                        ENGINE=INNODB")
 
 conn.cursor().execute("CREATE TABLE IF NOT EXISTS Animal(\
                         Name varchar(50) NOT NULL,\
@@ -138,7 +144,8 @@ conn.cursor().execute("CREATE TABLE IF NOT EXISTS Animal(\
                         FOREIGN KEY (Exhibit)\
                         REFERENCES Exhibit (Name)\
                         ON DELETE CASCADE\
-                        ON UPDATE CASCADE)")
+                        ON UPDATE CASCADE)\
+                        ENGINE=INNODB")
 
 conn.cursor().execute("CREATE TABLE IF NOT EXISTS Visit_Exhibit(\
                         Date_Time datetime NOT NULL,\
@@ -152,7 +159,8 @@ conn.cursor().execute("CREATE TABLE IF NOT EXISTS Visit_Exhibit(\
                         FOREIGN KEY (Exhibit_Name)\
                         REFERENCES Exhibit (Name)\
                         ON DELETE CASCADE\
-                        ON UPDATE CASCADE)")
+                        ON UPDATE CASCADE)\
+                        ENGINE=INNODB")
 
 conn.cursor().execute("CREATE TABLE IF NOT EXISTS Visit_Shows(\
                         Visitor varchar(50) NOT NULL,\
@@ -166,7 +174,8 @@ conn.cursor().execute("CREATE TABLE IF NOT EXISTS Visit_Shows(\
                         FOREIGN KEY (Shows_Name, Date_Time)\
                         REFERENCES Shows (Name, Date_Time)\
                         ON DELETE CASCADE\
-                        ON UPDATE CASCADE)")
+                        ON UPDATE CASCADE)\
+                        ENGINE=INNODB")
 
 conn.cursor().execute("CREATE TABLE IF NOT EXISTS Animal_Care(\
                             Text varchar(2000) NOT NULL,\
@@ -182,7 +191,8 @@ conn.cursor().execute("CREATE TABLE IF NOT EXISTS Animal_Care(\
                             FOREIGN KEY (Animal, Species)\
                             REFERENCES Animal(Name, Species)\
                             ON DELETE CASCADE\
-                            ON UPDATE CASCADE)")
+                            ON UPDATE CASCADE)\
+                            ENGINE=INNODB")
 
 for i in user:
     user_init(conn, i["username"], i["password"], i["email"], i["type"])
