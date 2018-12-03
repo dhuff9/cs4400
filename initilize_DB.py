@@ -67,16 +67,17 @@ conn = pymysql.connect(host='academic-mysql.cc.gatech.edu',
 if conn.open:
     print("Good conn")
 
-conn.cursor().execute("DROP TABLE IF EXISTS User")
+conn.cursor().execute("DROP TABLE IF EXISTS Animal_Care")
+conn.cursor().execute("DROP TABLE IF EXISTS Visit_Shows")
+conn.cursor().execute("DROP TABLE IF EXISTS Visit_Exhibit")
+conn.cursor().execute("DROP TABLE IF EXISTS Animal")
+conn.cursor().execute("DROP TABLE IF EXISTS Shows")
+conn.cursor().execute("DROP TABLE IF EXISTS Exhibit")
 conn.cursor().execute("DROP TABLE IF EXISTS Staff")
 conn.cursor().execute("DROP TABLE IF EXISTS Visitor")
 conn.cursor().execute("DROP TABLE IF EXISTS Admin")
-conn.cursor().execute("DROP TABLE IF EXISTS Exhibit")
-conn.cursor().execute("DROP TABLE IF EXISTS Shows")
-conn.cursor().execute("DROP TABLE IF EXISTS Animal")
-conn.cursor().execute("DROP TABLE IF EXISTS Visit_Exhibit")
-conn.cursor().execute("DROP TABLE IF EXISTS Visit_Shows")
-conn.cursor().execute("DROP TABLE IF EXISTS Animal_Care")
+conn.cursor().execute("DROP TABLE IF EXISTS User")
+
 
 
 
@@ -196,10 +197,10 @@ conn.cursor().execute("CREATE TABLE IF NOT EXISTS Animal_Care(\
 
 for i in user:
     user_init(conn, i["username"], i["password"], i["email"], i["type"])
-for i in animal:
-    animal_init(conn, i["name"], i["type"], i["species"], i["age"], i["exhibit"])
 for i in exhibit:
     exhibit_init(conn, i["name"], i["water_feature"], i["size"])
+for i in animal:
+    animal_init(conn, i["name"], i["type"], i["species"], i["age"], i["exhibit"])
 for i in shows:
     shows_init(conn, i["name"], i["date_time"], i["host"], i["exhibit"])
 conn.commit()
